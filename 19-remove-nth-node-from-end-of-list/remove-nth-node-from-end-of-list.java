@@ -23,12 +23,12 @@ class Solution {
             return head.next;
         }
         int indextosearch=size-n;
-        int i=1;
+     
         ListNode prev=head;
-        while(i<indextosearch){
+        for(int i=1;i<indextosearch;i++){
             prev=prev.next;
-            i++;
         }
+       
         prev.next=prev.next.next;
         return head;
         
