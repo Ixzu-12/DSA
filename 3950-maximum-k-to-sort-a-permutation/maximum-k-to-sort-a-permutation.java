@@ -1,7 +1,7 @@
 class Solution {
     public int sortPermutation(int[] nums) {
       int n=nums.length;
-      int k=-1;
+      int k=Integer.MAX_VALUE;
       for(int i=0;i<n;i++){
         if(nums[i]!=i){
             k=(k&nums[i]);
@@ -9,7 +9,7 @@ class Solution {
 
         }
       }
-      return k==-1 ? 0 : k;
+      return k==Integer.MAX_VALUE ? 0 : k;
 
        
     }
