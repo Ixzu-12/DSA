@@ -15,7 +15,7 @@
  */
 class Solution {
     public TreeNode insert(TreeNode root ,int val){
-        if(root==null||root.val==val){
+        if(root==null){
             root=new TreeNode(val);
 
         }
