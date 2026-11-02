@@ -9,11 +9,8 @@ class Solution {
         for(int i=0;i<n;i++){
             moves+=Math.abs(midelement-nums[i]);
 
-
-
-            
         }
-        return Math.abs(moves);
+        return moves;
 
         
     }
