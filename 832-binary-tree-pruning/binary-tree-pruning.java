@@ -14,27 +14,29 @@
  * }
  */
 class Solution {
-    public boolean presentone(TreeNode root){
-        if(root==null){
-            return false;
-        }
-        if(root.val==1){
-            return true;
-        }
-        return presentone(root.left) || presentone(root.right);
-    }
+    // public boolean presentone(TreeNode root){
+    //     if(root==null){
+    //         return false;
+    //     }
+    //     if(root.val==1){
+    //         return true;
+    //     }
+    //     return presentone(root.left) || presentone(root.right);
+    // }
     public TreeNode pruneTree(TreeNode root) {
         if(root==null){
             return null;
         }
-        if(!presentone(root.left)){
-            root.left=null;
-        }
-        if(!presentone(root.right)){
-            root.right=null;
-        }
-        pruneTree(root.left);
-        pruneTree(root.right);
+        // if(!presentone(root.left)){
+        //     root.left=null;
+        // }
+        // if(!presentone(root.right)){
+        //     root.right=null;
+        // }
+        // pruneTree(root.left);
+        // pruneTree(root.right);
+        root.left=pruneTree(root.left);
+        root.right=pruneTree(root.right);
         if(root.left==null&&root.right==null&&root.val==0){
             return null;
         }
