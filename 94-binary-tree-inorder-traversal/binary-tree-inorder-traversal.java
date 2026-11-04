@@ -16,21 +16,39 @@ import java.util.ArrayList;
  * }
  */
 class Solution {
-    public void inorder(TreeNode root,List<Integer> result){
-        if(root==null){
-            return;
-        }
-        inorder(root.left,result);
-        result.add(root.val);
-        inorder(root.right,result);
+    // public void inorder(TreeNode root,List<Integer> result){
+    //     if(root==null){
+    //         return;
+    //     }
+    //     inorder(root.left,result);
+    //     result.add(root.val);
+    //     inorder(root.right,result);
 
 
 
-    }
+    // }
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result=new ArrayList<>();
-        inorder(root,result);
+        TreeNode curr=root;
+        while(curr!=null){
+            if(curr.left==null){
+                result.add(curr.val);
+                curr=curr.right;
+            }
+            else{
+                TreeNode leftC=curr.left;
+                while(leftC.right!=null){
+                    leftC=leftC.right;
+                }
+                leftC.right=curr;
+                TreeNode temp=curr;
+                curr=curr.left;
+                temp.left=null;
+            }
+        }
         return result;
+       
+       
         
     }
 }
