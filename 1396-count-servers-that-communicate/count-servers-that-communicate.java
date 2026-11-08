@@ -1,35 +1,29 @@
+import java.util.Arrays;
 class Solution {
     public int countServers(int[][] grid) {
         int m=grid.length;
         int n=grid[0].length;
-        int count=0;
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                boolean can=false;
-                if(grid[i][j]==1){
-                    for(int column=0;column<n;column++){
-                        if(grid[i][column]==1&&column!=j){
-                            can=true;
-                        }
-                    }
-                    if(can==true){
-                        count++;
-                    }
-                    else{
-                        for(int row=0;row<m;row++){
-                            if(grid[row][j]==1&&row!=i){
-                                can=true;
-                            }
-                        }
-                        if(can==true){
-                            count++;
-                        }
-                    }
+        int rowcount[]=new int[m];
+        int colcount[]=new int[n];
+        Arrays.fill(rowcount,0);
+        Arrays.fill(colcount,0);
+        for(int row=0;row<m;row++){
+            for(int col=0;col<n;col++){
+                if(grid[row][col]==1){
+                    colcount[col]+=1;
+                    rowcount[row]+=1;
                 }
             }
-
         }
-        return count;
+        int servers=0;
+        for(int row=0;row<m;row++){
+            for(int col=0;col<n;col++){
+                if(grid[row][col]==1 &&(colcount[col]>1||rowcount[row]>1)){
+                    servers++;
+                }
+            }
+        }
+       return servers;
        
         
     }
