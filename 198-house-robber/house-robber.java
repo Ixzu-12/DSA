@@ -18,18 +18,35 @@ class Solution {
         // if we steal we wont be able to steal the next house so we can nums[i-1] and dp[i-2] steal kr skte h;
         // if we skip its just dp[i-1]
         // so 
-        dp[0]=0;
-        dp[1]=nums[0];
-        
-        for(int i=2;i<=nums.length;i++){
-            int steal=nums[i-1]+dp[i-2];
-            int skip=dp[i-1];
-            dp[i]=Math.max(steal,skip);
-           
+        if(nums.length==1){//corner case 
+            return nums[0];
+
 
         }
-        return dp[nums.length];
+        // dp[0]=0;
+        // dp[1]=nums[0];
+        
+        // for(int i=2;i<=nums.length;i++){
+        //     int steal=nums[i-1]+dp[i-2];
+        //     int skip=dp[i-1];
+        //     dp[i]=Math.max(steal,skip);
+           
 
+        // }
+        // return dp[nums.length];
+        // in constant space
+        int prevPrev=0;
+        int prev=nums[0];
+        for(int i=2;i<=nums.length;i++){
+            int skip=prev;
+
+            int steal=nums[i-1]+prevPrev;
+            int temp=Math.max(steal,skip);
+            prevPrev=prev;
+            prev=temp;
+        }
+        return prev;
+       
         
         
     }
