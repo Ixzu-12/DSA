@@ -19,28 +19,41 @@ class Solution {
         return j==m;
 
     }
-    public int solve(int i,int p,String[] words,int dp[][]){
-        if(i>=words.length) return 0;
-        if(p!=-1&&dp[i][p]!=-1){
-            return dp[i][p];
-        }
-        int skip=solve(i+1,p,words,dp);
-        int take=0;
-        if(p==-1||ispredecessor(words[i],words[p])){
-            take=1+solve(i+1,i,words,dp);
-        }
-        if(p!=-1){
-            dp[i][p]=Math.max(take,skip);
-        }
-        return Math.max(skip,take);
-    }
+    // public int solve(int i,int p,String[] words,int dp[][]){
+    //     if(i>=words.length) return 0;
+    //     if(p!=-1&&dp[i][p]!=-1){
+    //         return dp[i][p];
+    //     }
+    //     int skip=solve(i+1,p,words,dp);
+    //     int take=0;
+    //     if(p==-1||ispredecessor(words[i],words[p])){
+    //         take=1+solve(i+1,i,words,dp);
+    //     }
+    //     if(p!=-1){
+    //         dp[i][p]=Math.max(take,skip);
+    //     }
+    //     return Math.max(skip,take);
+    // }
     public int longestStrChain(String[] words) {
         Arrays.sort(words,(s1,s2)-> s1.length()-s2.length());
-        int dp[][]=new int[words.length][words.length];
-        for(int[] rows:dp){
-            Arrays.fill(rows,-1);
+        // int dp[][]=new int[words.length][words.length];
+        // for(int[] rows:dp){
+        //     Arrays.fill(rows,-1);
+        // }
+        // return solve(0,-1,words,dp);
+        int dp[]=new int[words.length];
+        int max=1;
+        Arrays.fill(dp,1);
+        for(int i=1;i<words.length;i++){
+            for(int j=0;j<i;j++){
+                if(ispredecessor(words[i],words[j])){
+                    dp[i]=Math.max(dp[i],dp[j]+1);
+                    max=Math.max(dp[i],max);
+                }
+            }
         }
-        return solve(0,-1,words,dp);
+        return max;
+
 
         
     }
