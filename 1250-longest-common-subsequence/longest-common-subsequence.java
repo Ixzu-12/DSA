@@ -8,7 +8,7 @@ class Solution {
             return dp[i][j];
         }
         if(s1.charAt(i)==s2.charAt(j)){
-            return 1+solve(s1,s2,i+1,j+1,dp);
+            return dp[i][j]= 1+solve(s1,s2,i+1,j+1,dp);
         }
         else{
             return dp[i][j]=Math.max(solve(s1,s2,i,j+1,dp),solve(s1,s2,i+1,j,dp));
